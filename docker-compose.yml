@@ -12,12 +12,5 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
 
-  redis:
-      image: redis:7-alpine
-      container_name: contract_manager_cache
-      ports:
-        - "${REDIS_PORT}:6379"
-      restart: unless-stopped
-
 volumes:
   pgdata:

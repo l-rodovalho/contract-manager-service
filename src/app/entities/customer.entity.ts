@@ -7,11 +7,7 @@ import {
     DeleteDateColumn,
     VersionColumn
 } from 'typeorm';
-
-export enum EntityStatus {
-    ACTIVE = 'ACTIVE',
-    INACTIVE = 'INACTIVE',
-}
+import { CustomerStatus } from '../../domain/enums/customer-status.enum';
 
 @Entity('customers')
 export class Customer {
@@ -30,8 +26,8 @@ export class Customer {
     @Column({ name: 'contact_email', type: 'varchar', length: 255 })
     contactEmail: string;
 
-    @Column({ type: 'enum', enum: EntityStatus, default: EntityStatus.ACTIVE })
-    status: EntityStatus;
+    @Column({ type: 'enum', enum: CustomerStatus, default: CustomerStatus.ACTIVE })
+    status: CustomerStatus;
 
     @VersionColumn()
     version: number;
