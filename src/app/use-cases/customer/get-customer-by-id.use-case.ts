@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CustomerRepositoryGateway } from "src/app/gateways/customer.repository.gateway";
 
 @Injectable()
@@ -8,6 +8,10 @@ export class GetCustomerByIdUseCase {
     ) { }
 
     async execute(id: number) {
-        return this.customerRepository.findById(id);
+        const customer = await this.customerRepository.findById(id);
+        if (!customer) {
+            throw new NotFoundException('Customer not found');
+        }
+        return customer;
     }
 }

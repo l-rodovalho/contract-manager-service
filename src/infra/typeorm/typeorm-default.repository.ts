@@ -1,6 +1,7 @@
 import { DefaultRepositoryGateway } from "src/app/gateways/default.repository.gateway";
 import { Repository } from "typeorm";
 import { Identifiable } from "../utils/identifiable";
+import { CustomerStatus } from "src/domain/enums/customer-status.enum";
 
 export class TypeOrmDefaultRepository<Entity extends Identifiable> implements DefaultRepositoryGateway<Entity> {
     constructor(
@@ -22,10 +23,13 @@ export class TypeOrmDefaultRepository<Entity extends Identifiable> implements De
     async findById(id: number): Promise<Entity | null> {
         return this.repository.createQueryBuilder('entity')
             .where('entity.id = :id', { id })
+            .andWhere('entity.status = :status', { status: CustomerStatus.ACTIVE })
             .getOne();
     }
 
     async findAll(): Promise<Entity[]> {
-        return this.repository.find();
+        return this.repository.createQueryBuilder('entity')
+            .where('entity.status = :status', { status: CustomerStatus.ACTIVE })
+            .getMany();
     }
 }
