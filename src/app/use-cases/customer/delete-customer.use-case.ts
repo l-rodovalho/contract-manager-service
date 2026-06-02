@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { CustomerRepositoryGateway } from "src/app/gateways/customer.repository.gateway";
-import { CustomerStatus } from "src/domain/enums/customer-status.enum";
+import { UserStatus } from "src/domain/enums/user-status.enum";
 
 @Injectable()
 export class DeleteCustomerUseCase {
@@ -14,7 +14,7 @@ export class DeleteCustomerUseCase {
             throw new NotFoundException('Customer not found');
         }
 
-        existingCustomer.status = CustomerStatus.INACTIVE;
+        existingCustomer.status = UserStatus.INACTIVE;
         existingCustomer.updatedAt = new Date();
 
         return this.customerRepository.update(existingCustomer);

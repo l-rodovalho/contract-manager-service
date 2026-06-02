@@ -2,7 +2,7 @@ import { ConflictException, Injectable } from "@nestjs/common";
 import { CreateCustomerDto } from "src/app/dtos/customer/create-customer.dto";
 import { CustomerRepositoryGateway } from "src/app/gateways/customer.repository.gateway";
 import { Customer } from "src/app/entities/customer.entity";
-import { CustomerStatus } from "src/domain/enums/customer-status.enum";
+import { UserStatus } from "src/domain/enums/user-status.enum";
 
 @Injectable()
 export class CreateCustomerUseCase {
@@ -29,7 +29,7 @@ export class CreateCustomerUseCase {
         entity.tradeName = customer.tradeName;
         entity.documentId = formattedDocumentId;
         entity.contactEmail = customer.contactEmail;
-        entity.status = CustomerStatus.ACTIVE;
+        entity.status = UserStatus.ACTIVE;
         entity.createdAt = new Date();
         entity.updatedAt = new Date();
         entity.version = 1;

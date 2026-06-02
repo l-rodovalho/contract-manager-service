@@ -5,6 +5,8 @@ import { databaseConfig } from "./database.config";
 import { CustomerRepositoryGateway } from "src/app/gateways/customer.repository.gateway";
 import { TypeOrmCustomerRepository } from "../typeorm/typeorm-customer.repository";
 import { APP_ENTITIES } from "src/app/entities";
+import { UserRepositoryGateway } from "src/app/gateways/user.repository.gateway";
+import { TypeOrmUserRepository } from "../typeorm/typeorm-user.repository";
 
 @Module({
     imports: [
@@ -25,7 +27,10 @@ import { APP_ENTITIES } from "src/app/entities";
     providers: [{
         provide: CustomerRepositoryGateway,
         useClass: TypeOrmCustomerRepository,
+    }, {
+        provide: UserRepositoryGateway,
+        useClass: TypeOrmUserRepository,
     }],
-    exports: [CustomerRepositoryGateway],
+    exports: [CustomerRepositoryGateway, UserRepositoryGateway],
 })
 export class DatabaseModule { }
