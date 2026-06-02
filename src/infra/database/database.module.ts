@@ -7,6 +7,8 @@ import { TypeOrmCustomerRepository } from "../typeorm/typeorm-customer.repositor
 import { APP_ENTITIES } from "src/app/entities";
 import { UserRepositoryGateway } from "src/app/gateways/user.repository.gateway";
 import { TypeOrmUserRepository } from "../typeorm/typeorm-user.repository";
+import { ContractRepositoryGateway } from "src/app/gateways/contract.repository.gateway";
+import { TypeOrmContractRepository } from "../typeorm/typeorm-contract.repository";
 
 @Module({
     imports: [
@@ -30,7 +32,10 @@ import { TypeOrmUserRepository } from "../typeorm/typeorm-user.repository";
     }, {
         provide: UserRepositoryGateway,
         useClass: TypeOrmUserRepository,
+    }, {
+        provide: ContractRepositoryGateway,
+        useClass: TypeOrmContractRepository,
     }],
-    exports: [CustomerRepositoryGateway, UserRepositoryGateway],
+    exports: [CustomerRepositoryGateway, UserRepositoryGateway, ContractRepositoryGateway],
 })
 export class DatabaseModule { }
