@@ -1,7 +1,6 @@
 import { DefaultRepositoryGateway } from "src/app/gateways/default.repository.gateway";
 import { Repository } from "typeorm";
 import { Identifiable } from "../utils/identifiable";
-import { UserStatus } from "src/domain/enums/user-status.enum";
 
 export class TypeOrmDefaultRepository<Entity extends Identifiable> implements DefaultRepositoryGateway<Entity> {
     constructor(
