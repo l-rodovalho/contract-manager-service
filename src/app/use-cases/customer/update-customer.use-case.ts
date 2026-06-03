@@ -30,7 +30,7 @@ export class UpdateCustomerUseCase {
             }
 
             const existingDocumentId = await this.customerRepository.findByDocumentId(formattedDocumentId);
-            if (existingDocumentId) {
+            if (existingDocumentId && existingDocumentId.id !== id) {
                 throw new ConflictException('Customer with this document id already exists');
             }
         }
